@@ -11,8 +11,8 @@ The working directory inside the Docker container is **`/data/`** and should be 
 ## Usage
 
 ```bash
-docker run --rm -v $(pwd):/data cytopia/terragrunt terragrunt <ARGS>
-docker run --rm -v $(pwd):/data cytopia/terragrunt terraform <ARGS>
+docker run --rm -v $(pwd):/data chokkalingamk/terragrunt terragrunt <ARGS>
+docker run --rm -v $(pwd):/data chokkalingamk/terragrunt terraform <ARGS>
 ```
 
 ## Environment variables
@@ -67,7 +67,7 @@ docker run --rm \
   -u $(id -u):$(id -g) \
   -v /my/tf:/data \
   -w /data/mysql \
-  cytopia/terragrunt terragrunt init
+  chokkalingamk/terragrunt terragrunt init
 
 # Plan the MySQL project
 docker run --rm \
@@ -77,7 +77,7 @@ docker run --rm \
   -u $(id -u):$(id -g) \
   -v /my/tf:/data \
   -w /data/mysql \
-  cytopia/terragrunt terragrunt plan
+  chokkalingamk/terragrunt terragrunt plan
 
 # Apply the MySQL project
 docker run --rm \
@@ -87,7 +87,7 @@ docker run --rm \
   -u $(id -u):$(id -g) \
   -v /my/tf:/data \
   -w /data/mysql \
-  cytopia/terragrunt terragrunt --terragrunt-non-interactive apply
+  chokkalingamk/terragrunt terragrunt --terragrunt-non-interactive apply
 ```
 <!-- #### 1.4 Makefile integration -->
 
@@ -133,7 +133,7 @@ docker run --rm \
   -u $(id -u):$(id -g) \
   -v /my/tf:/data \
   -w /data/envs/aws/dev/eu-central-1/infra/vpc-k8s \
-  cytopia/terragrunt terragrunt init
+  chokkalingamk/terragrunt terragrunt init
 
 # Plan the VPC project
 docker run --rm \
@@ -143,7 +143,7 @@ docker run --rm \
   -u $(id -u):$(id -g) \
   -v /my/tf:/data \
   -w /data/envs/aws/dev/eu-central-1/infra/vpc-k8s \
-  cytopia/terragrunt terragrunt plan
+  chokkalingamk/terragrunt terragrunt plan
 
 # Apply the VPC project
 docker run --rm \
@@ -153,7 +153,7 @@ docker run --rm \
   -u $(id -u):$(id -g) \
   -v /my/tf:/data \
   -w /data/envs/aws/dev/eu-central-1/infra/vpc-k8s \
-  cytopia/terragrunt terragrunt --terragrunt-non-interactive apply
+  chokkalingamk/terragrunt terragrunt --terragrunt-non-interactive apply
 ```
 
 <!-- #### 2.4 Makefile integration -->
