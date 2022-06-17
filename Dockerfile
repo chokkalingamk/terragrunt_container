@@ -62,6 +62,7 @@ RUN set -eux \
 COPY --from=builder /usr/bin/terraform /usr/bin/terraform
 COPY --from=builder /usr/bin/terragrunt /usr/bin/terragrunt
 COPY data/docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod 777 /docker-entrypoint.sh
 
 WORKDIR /data
 CMD ["terragrunt", "--version"]

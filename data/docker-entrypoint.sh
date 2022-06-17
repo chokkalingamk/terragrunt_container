@@ -7,8 +7,8 @@ set -eu
 ###
 DEFAULT_UID=1000
 DEFAULT_GID=1000
-DEFAULT_USER=cytopia
-DEFAULT_HOME=/home/cytopia
+DEFAULT_USER=terragrunt
+DEFAULT_HOME=/home/terragrunt
 RUN_ROOT=1
 
 
