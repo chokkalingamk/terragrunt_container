@@ -65,5 +65,13 @@ COPY data/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod 777 /docker-entrypoint.sh
 
 WORKDIR /data
+RUN apk add --no-cache \
+        python3 \
+        py3-pip \
+    && pip3 install --upgrade pip \
+    && pip3 install --no-cache-dir \
+        awscli \
+    && rm -rf /var/cache/apk/*
+#RUN aws --version   # Just to make sure its installed alright
 CMD ["terragrunt", "--version"]
 ENTRYPOINT ["/docker-entrypoint.sh"]

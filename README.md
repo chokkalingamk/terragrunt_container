@@ -131,9 +131,9 @@ docker run --rm \
   -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
   -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN \
   -u $(id -u):$(id -g) \
-  -v /my/tf:/data \
-  -w /data/envs/aws/dev/eu-central-1/infra/vpc-k8s \
-  chokkalingamk/terragrunt terragrunt init
+  -v /Users/chokkalingamk/Library/CloudStorage/OneDrive-KornerstoneSchool/IDFC/infra-starter-master:/data \
+  -w /data/environments/dev/eks \
+  chokkalingamk/terragruntexec:v1.0 terragrunt init
 
 # Plan the VPC project
 docker run --rm \
