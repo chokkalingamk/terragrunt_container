@@ -43,18 +43,12 @@ pipelines:
             - exec:
                 arguments:
                 - -c
-                - docker build -t $IMAGE:$VERSION .
+                - make build
                 command: /bin/bash
                 run_if: passed
             - exec:
                 arguments:
                 - -c
-                - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-                command: /bin/bash
-                run_if: passed
-            - exec:
-                arguments:
-                - -c
-                - docker push $IMAGE:$VERSION
+                - make push
                 command: /bin/bash
                 run_if: passed
