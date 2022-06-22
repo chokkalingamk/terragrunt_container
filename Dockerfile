@@ -55,8 +55,7 @@ RUN set -eux \
 # Use a clean tiny image to store artifacts in
 FROM alpine:3.13
 LABEL \
-	maintainer="cytopia <cytopia@everythingcli.org>" \
-	repo="https://github.com/cytopia/docker-terragrunt"
+	maintainer="Chokkalingam K <chokkalingam.k@outlook.com>" 
 RUN set -eux \
 	&& apk add --no-cache git openssh-client
 COPY --from=builder /usr/bin/terraform /usr/bin/terraform
