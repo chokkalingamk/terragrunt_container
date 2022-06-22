@@ -1,0 +1,60 @@
+format_version: 10
+pipelines:
+  INFRA-IAAC-PIPELINE:
+    group: IDFC_SPARK_SP0
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    environment_variables:
+      VERSION: V.1.4
+      IMAGE: chokkalingamk/terragruntexec
+    secure_variables:
+      DOCKER_USERNAME: AES:l7EsKFGiDQvES7z27z2Zww==:QxKH7vCKHT9PH1RFHFYF4A==
+      DOCKER_PASSWORD: AES:n9DrOjoeid2/gN7J/Wa2zA==:xc77cbD+a+owKxX21kXkVowgS4jArBM3/c1xnTZd+a4mse2h4xM/siGcCO9jAgqP
+    materials:
+      git-672d36c:
+        git: https://github.com/chokkalingamk/terragrunt_container.git
+        username: chokkalingamk
+        shallow_clone: false
+        auto_update: true
+        branch: main
+        encrypted_password: AES:xNnNYyhnkni0zHxGYRQEWw==:08u7StQE9ScHFB2CdhUrQ5aO9RBlCA21pdJ5C17B/ALQpgz6zXxRrLXKrplhorxp
+    stages:
+    - Terragrunt_Build:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: manual
+          allow_only_on_success: false
+        jobs:
+          Build_Push_Container:
+            timeout: 0
+            environment_variables:
+              VERSION: V.1.4
+              IMAGE: chokkalingamk/terragruntexec
+            secure_variables:
+              DOCKER_USERNAME: AES:kl3mGiiejTk/D9NJBCztzw==:B2uTRpiOsOQB24GR/KebFQ==
+              DOCKER_PASSWORD: AES:XiA9M7kVng8zvJIeng1svA==:A/YUthq+xinC4llCSSpQ5rcvzPUXC6hNlsuSsAf8arCiroRxLgsXtdzmZddiB4Ox
+            tasks:
+            - exec:
+                command: ls
+                run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - docker build -t $IMAGE:$VERSION .
+                command: /bin/bash
+                run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+                command: /bin/bash
+                run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - docker push $IMAGE:$VERSION
+                command: /bin/bash
+                run_if: passed
