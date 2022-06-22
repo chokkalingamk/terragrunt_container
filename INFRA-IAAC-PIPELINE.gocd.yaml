@@ -1,7 +1,7 @@
 format_version: 10
 pipelines:
-  INFRA-IAAC-PIPELINE:
-    group: IDFC_SPARK_SP0
+  INFRA-TOOLKIT-YAML:
+    group: IDFC_SPARK_SP0_YAML
     label_template: ${COUNT}
     lock_behavior: none
     display_order: -1
@@ -12,7 +12,7 @@ pipelines:
       DOCKER_USERNAME: AES:l7EsKFGiDQvES7z27z2Zww==:QxKH7vCKHT9PH1RFHFYF4A==
       DOCKER_PASSWORD: AES:n9DrOjoeid2/gN7J/Wa2zA==:xc77cbD+a+owKxX21kXkVowgS4jArBM3/c1xnTZd+a4mse2h4xM/siGcCO9jAgqP
     materials:
-      git-672d36c:
+      INFRA-TOOLKIT:
         git: https://github.com/chokkalingamk/terragrunt_container.git
         username: chokkalingamk
         shallow_clone: false
