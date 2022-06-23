@@ -31,7 +31,7 @@ pipelines:
           Build_Push_Container:
             timeout: 0
             environment_variables:
-              VERSION: V.1.4
+              VERSION: V.1.5
               IMAGE: chokkalingamk/terragruntexec
             secure_variables:
               DOCKER_USERNAME: AES:kl3mGiiejTk/D9NJBCztzw==:B2uTRpiOsOQB24GR/KebFQ==
