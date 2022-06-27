@@ -59,7 +59,7 @@ ARG HELM_VERSION=3.2.1
 ARG KUBECTL_VERSION=1.17.5
 ARG KUSTOMIZE_VERSION=v3.8.1
 ARG KUBESEAL_VERSION=v0.15.0
-ARG ANSIBLE_VERSION_ARG "2.9.27"
+#ARG ANSIBLE_VERSION_ARG "2.9.27"
 
 
 LABEL \
@@ -140,40 +140,14 @@ RUN authenticator=$(aws --no-sign-request s3 ls s3://amazon-eks --recursive |gre
 #     chmod +x /usr/bin/kubeseal
 
 # Install ansible 
-ENV ANSIBLE_VERSION ${ANSIBLE_VERSION_ARG}
-RUN CARGO_NET_GIT_FETCH_WITH_CLI=1 && \
-    apk --no-cache add \
-        sudo \
-        python3\
-        py3-pip \
-        openssl \
-        ca-certificates \
-        sshpass \
-        openssh-client \
-        rsync \
-        git && \
-    apk --no-cache add --virtual build-dependencies \
-        python3-dev \
-        libffi-dev \
-        musl-dev \
-        gcc \
-        cargo \
-        openssl-dev \
-        libressl-dev \
-        build-base && \
-    pip install --upgrade pip wheel && \
-    pip install --upgrade cryptography cffi && \
-    pip install ansible==${ANSIBLE_VERSION} && \
-    pip install mitogen==0.2.10 ansible-lint jmespath && \
-    pip install --upgrade pywinrm && \
-    apk del build-dependencies && \
-    rm -rf /var/cache/apk/* && \
-    rm -rf /root/.cache/pip && \
-    rm -rf /root/.cargo
-
-RUN	mkdir -p /etc/ansible && \
-    echo 'localhost' > /etc/ansible/hosts
-
+RUN set -xe \
+    && apk add --no-cache --purge -uU ansible ansible-lint sudo curl ca-certificates openssh-client \
+    && apk --update add --virtual .build-dependencies python3-dev libffi-dev openssl-dev build-base \
+    && pip3 install --no-cache --upgrade ansible \
+    && apk del --purge .build-dependencies \
+    && mkdir -p /etc/ansible \
+    && echo 'localhost' > /etc/ansible/hosts \
+    && rm -rf /var/cache/apk/* /tmp/*
 
 WORKDIR /data
 #RUN aws --version   # Just to make sure its installed alright
