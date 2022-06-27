@@ -6,7 +6,7 @@ pipelines:
     lock_behavior: none
     display_order: -1
     environment_variables:
-      VERSION: V.1.5
+      VERSION: V.1.6
       IMAGE: chokkalingamk/terragruntexec
     secure_variables:
       DOCKER_USERNAME: AES:l7EsKFGiDQvES7z27z2Zww==:QxKH7vCKHT9PH1RFHFYF4A==
